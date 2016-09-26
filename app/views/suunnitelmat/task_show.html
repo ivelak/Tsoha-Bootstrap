@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Vie roskat</h1>
+  <!-- Painikkeet tähän -->
+  <p>
+    <button class="btn btn-danger">Poista</button> <a href="{{base_path}}/modify" class="btn btn-default">Muokkaa</a>
+  </p>
+  <!-- Tiedot tulee listana tähän -->
+  <ul>
+    <li><strong>Tärkeysaste:</strong> 3</li>
+    <li><strong>Deadline:</strong> 28.9.2016 klo 7.00</li>
+    <li><strong>Askareluokat:</strong> Kotityöt</li>
+  </ul>
+  <!-- Kuvaus tulee tähän -->
+  <p>
+      Roskien viennissä sinun edellytetään lajittelevan kaikki metalli-, lasi-, bio-, paperi- ja pahvijätteet erikseen. Kaiken lopun saastan voit heittää sekajätteeseen.
+  </p>
+{% endblock %}

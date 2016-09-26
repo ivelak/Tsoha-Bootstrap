@@ -1,10 +1,23 @@
 # Tietokantasovelluksen esittelysivu
 
+Sovellukseeni liittyviä linkkejä:
+
+* [Linkki etusivulle](rantapel.users.cs.helsinki.fi/tsoha)
+* [Linkki listaussivulle](rantapel.users.cs.helsinki.fi/tsoha/task_list)
+* [Linkki esittelysivulle](rantapel.users.cs.helsinki.fi/tsoha/1)
+* [Linkki muokkaussivulle](rantapel.users.cs.helsinki.fi/tsoha/modify)
+
+
+
+* [Linkki dokumentaatiooni](https://github.com/ivelak/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
+
 Yleisiä linkkejä:
 
-* [Linkki sovellukseeni](rantapel.users.cs.helsinki.fi/tsoha)
-* [Linkki dokumentaatiooni](https://github.com/ivelak/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
+* [typography - tekstin asettelu ja tyylittely](http://getbootstrap.com/css/#type)
+* [tables - taulukot](http://getbootstrap.com/css/#tables)
+* [forms - lomakkeet](http://getbootstrap.com/css/#forms)
+* [buttons - painikkeet](http://getbootstrap.com/css/#buttons)
 
 ## Työn aihe
 
-Työn aiheena on web-sovellus vedonlyöjän käyttöön. Sovelluksen avulla vedonlyöjä voi tallentaa vedonlyöntikohteensa tuloksineen ja pitää kirjaa betseistänsä. Sivusto ylläpitää eri lajien sarjojen sarjataulukoita ja otteluiden tuloksia.
+* [Muistilista](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Muistilista.html)

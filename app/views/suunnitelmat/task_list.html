@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Askarelista</h1>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Askare</th>
+            <th>Tärkeysaste</th>
+            <th>Deadline</th>
+            <th>Askareluokat</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        <tr>
+            <td><a href="{{base_path}}/task/1">Vie roskat</a></td>
+            <td>3</td>
+            <td>28.9.2016 klo 7.00</td>
+            <td>Kotityöt</td>
+            <th><a class="btn btn-default btn-sm" href="{{base_path}}/modify">Muokkaa</a></th>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}
