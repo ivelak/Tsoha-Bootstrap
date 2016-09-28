@@ -8,7 +8,11 @@ class HelloWorldController extends BaseController {
     }
 
     public static function sandbox() {
-        View::make('helloworld.html');
+        $roskat = Task::find(1);
+        $askareet = Task::all();
+        
+        Kint::dump($askareet);
+        Kint::dump($roskat);
     }
     
     public static function task_list() {

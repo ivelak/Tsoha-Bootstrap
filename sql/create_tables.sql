@@ -1,38 +1,38 @@
 
 
-CREATE TABLE Kayttaja(
+CREATE TABLE Oblivious(
     id SERIAL PRIMARY KEY,
-    nimi varchar(15) NOT NULL,
-    salasana varchar(50) NOT NULL
+    name varchar(15) NOT NULL,
+    password varchar(50) NOT NULL
 );
 
 
-CREATE TABLE Askare(
+CREATE TABLE Task(
     id SERIAL PRIMARY KEY,
-    kayttaja_id INTEGER REFERENCES Kayttaja(id),
-    nimi varchar(50) NOT NULL,
-    kuvaus varchar(500)
+    oblivious_id INTEGER REFERENCES Oblivious(id),
+    name varchar(50) NOT NULL,
+    description varchar(500)
 );
 
 
-CREATE TABLE Askareluokka(
+CREATE TABLE Taskclass(
     id SERIAL PRIMARY KEY,
-    nimi varchar(50) NOT NULL,
-    kuvaus varchar(500)
+    name varchar(50) NOT NULL,
+    description varchar(500)
 );
 
-CREATE TABLE Askareluokkaliitos(
-    askare_id INTEGER REFERENCES Askare(id),
-    askareluokka_id INTEGER REFERENCES Askareluokka(id)
+CREATE TABLE Taskclassunion(
+    task_id INTEGER REFERENCES Task(id),
+    taskclass_id INTEGER REFERENCES Taskclass(id)
 );
 
-CREATE TABLE Tarkeysaste(
-    askare_id INTEGER REFERENCES Askare(id),
-    tarkeys INT NOT NULL
+CREATE TABLE Importance(
+    task_id INTEGER REFERENCES Task(id),
+    importance INT NOT NULL
 );
 
 CREATE TABLE Deadline(
-    dedis DATE NOT NULL,
-    askare_id INTEGER REFERENCES Askare(id)
+    deadline DATE NOT NULL,
+    task_id INTEGER REFERENCES Task(id)
 );
     
