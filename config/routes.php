@@ -4,8 +4,6 @@ $routes->get('/task', function() {
     TaskController::index();
 });
 
-
-
 $routes->post('/task', function() {
     TaskController::store();
 });

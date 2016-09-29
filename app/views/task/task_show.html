@@ -5,6 +5,9 @@
 <p>
     <button class="btn btn-danger">Poista</button> <a href="{{base_path}}/modify" class="btn btn-default">Muokkaa</a>
 </p>
+<div class="alert alert-success">
+    {{message}}
+</div>
 <!-- Tiedot tulee listana tähän -->
 <ul>
     <li><strong>Tärkeys:</strong> 3</li>
@@ -20,6 +23,6 @@
                 <!-- Kuvaus tulee tähän -->
                 <p>
                 <h2> Tarkempi kuvaus: </h2>
-                    {{task.description}}
+                {{task.description}}
                 </p>
                 {% endblock %}

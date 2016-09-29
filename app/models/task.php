@@ -56,4 +56,14 @@ class Task extends BaseModel {
         return $task;
     }
 
+    public function save() {
+
+        $query = DB::connection()->prepare('INSERT INTO Task (name, description) VALUES (:name, :description) RETURNING id');
+        $query->execute(array('name' => $this->name, 'description' => $this->description));
+        $row = $query->fetch();
+//        Kint::trace();
+//        Kint::dump($row);
+        $this->id = $row['id'];
+    }
+
 }
