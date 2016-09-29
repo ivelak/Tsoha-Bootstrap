@@ -1,7 +1,21 @@
 <?php
 
-$routes->get('/tasks', function()     {
+$routes->get('/task', function() {
     TaskController::index();
+});
+
+
+
+$routes->post('/task', function() {
+    TaskController::store();
+});
+
+$routes->get('/task/new', function() {
+    TaskController::create();
+});
+
+$routes->get('/task/:id', function($id) {
+    TaskController::show($id);
 });
 
 $routes->get('/', function() {
@@ -16,9 +30,7 @@ $routes->get('/task_list', function() {
     HelloWorldController::task_list();
 });
 
-    $routes->get('/task/:id', function($id) {
-    TaskController::show($id);
-});
+
 
 $routes->get('/login', function() {
     HelloWorldController::login();
