@@ -11,7 +11,8 @@ CREATE TABLE Task(
     id SERIAL PRIMARY KEY,
     oblivious_id INTEGER REFERENCES Oblivious(id),
     name varchar(50) NOT NULL,
-    description varchar(500)
+    description varchar(500),
+    done boolean DEFAULT FALSE
 );
 
 
