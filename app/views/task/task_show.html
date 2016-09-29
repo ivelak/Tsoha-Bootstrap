@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{task.name}}</h1>
+<!-- Painikkeet tähän -->
+<p>
+    <button class="btn btn-danger">Poista</button> <a href="{{base_path}}/modify" class="btn btn-default">Muokkaa</a>
+</p>
+<!-- Tiedot tulee listana tähän -->
+<ul>
+    <li><strong>Tärkeys:</strong> 3</li>
+    <li><strong>Deadline:</strong> 28.9.2016 klo 7.00</li>
+    <li><strong>Luokat:</strong> Kotityöt</li>
+    <li><strong>Vaiheessa:</strong>
+        {% if task.done %}
+        <label class="label label-success">ei
+            {% else %}
+            <label class="label label-warning">ON
+                {% endif %}</li>
+                </ul>
+                <!-- Kuvaus tulee tähän -->
+                <p>
+                <h2> Tarkempi kuvaus: </h2>
+                    {{task.description}}
+                </p>
+                {% endblock %}

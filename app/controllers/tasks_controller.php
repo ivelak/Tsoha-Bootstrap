@@ -1,20 +1,19 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- * Description of tasks_controller
- *
- * @author antti
- */
 class TaskController extends BaseController {
 
     public static function index() {
         $tasks = Task::all();
+
+        View::make('task/task_list.html', array('tasks' => $tasks));
+    }
+    
+    public static function show($id) {
+        
+        $task = Task::find($id);
+        
+        View::make('task/task_show.html', array('task'=>$task));
     }
 
 }

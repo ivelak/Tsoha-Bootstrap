@@ -13,7 +13,7 @@
  */
 class Task extends BaseModel {
 
-    public $id, $name, $description, $oblivious_id;
+    public $id, $name, $description, $oblivious_id, $done;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -30,7 +30,8 @@ class Task extends BaseModel {
                 'id' => $row['id'],
                 'name' => $row['name'],
                 'description' => $row['description'],
-                'oblivious_id' => $row['oblivious_id']
+                'oblivious_id' => $row['oblivious_id'],
+                'done' => $row['done']
             ));
         }
         return $tasks;
@@ -47,10 +48,11 @@ class Task extends BaseModel {
                 'id' => $row['id'],
                 'name' => $row['name'],
                 'description' => $row['description'],
-                'oblivious_id' => $row['oblivious_id']
+                'oblivious_id' => $row['oblivious_id'],
+                'done' => $row['done']
             ));
         }
-        
+
         return $task;
     }
 
