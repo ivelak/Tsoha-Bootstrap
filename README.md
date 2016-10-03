@@ -21,3 +21,8 @@ Yleisiä linkkejä:
 ## Työn aihe
 
 * [Muistilista](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Muistilista.html)
+
+## Käyttäjätunnus testaamiseen
+
+* Käyttäjätunnus: Pasi
+* Salasana: salasana
