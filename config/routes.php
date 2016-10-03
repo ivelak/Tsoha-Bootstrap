@@ -16,6 +16,18 @@ $routes->get('/task/:id', function($id) {
     TaskController::show($id);
 });
 
+$routes->get('/task/:id/edit', function($id){
+  TaskController::edit($id);
+});
+
+$routes->post('/task/:id/edit', function($id){
+  TaskController::update($id);
+});
+
+$routes->post('/task/:id/destroy', function($id){
+  TaskController::destroy($id);
+});
+
 $routes->get('/', function() {
     HelloWorldController::index();
 });

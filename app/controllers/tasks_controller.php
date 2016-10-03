@@ -15,6 +15,32 @@ class TaskController extends BaseController {
         View::make('task/task_show.html', array('task' => $task));
     }
 
+    public static function edit($id) {
+        $task = Task::find($id);
+        View::make('task/edit.html', array('attributes' => $task));
+    }
+
+    public static function update($id) {
+        $params = $_POST;
+
+        $attributes = array(
+            'id' => $id,
+            'name' => $params['name'],
+            'description' => $params['description']
+        );
+
+        $task = new Task($attributes);
+        $errors = $task->errors();
+
+        if (count($errors) > 0) {
+            View::make('task/edit.html', array('errors' => $errors, 'attributes' => $attributes));
+        } else {
+            $game->update();
+
+            Redirect::to('/task/' . $task->id, array('message' => 'Askaretta on muokattu onnistuneesti!'));
+        }
+    }
+
     public static function create() {
         View::make('task/new.html');
     }
@@ -36,11 +62,18 @@ class TaskController extends BaseController {
 
             Redirect::to('/task/' . $task->id, array('message' => 'Uusi askare lisätty!'));
         } else {
-            //Kint::dump($errors);
+//Kint::dump($errors);
             View::make('task/new.html', array('errors' => $errors, 'attributes' => $attributes));
         }
 
-        //Kint::dump($params);
+//Kint::dump($params);
+    }
+
+    public static function destroy($id) {
+        $task = new Task(array('id' => $id));
+        $task->destroy();
+
+        Redirect::to('/task', array('message' => 'Askare on poistettu onnistuneesti!'));
     }
 
 }
