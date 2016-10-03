@@ -9,9 +9,9 @@ class Task extends BaseModel {
         $this->validators = array('validate_name');
     }
 
-    public static function all() {
+    public static function all($oblivious_id) {
         $query = DB::connection()->prepare('SELECT * FROM Task WHERE oblivious_id = :oblivious_id');
-        $query->execute();
+        $query->execute(array('oblivious_id' => $oblivious_id));
         $rows = $query->fetchAll();
         $tasks = array();
 
@@ -49,7 +49,7 @@ class Task extends BaseModel {
     public function save() {
 
         $query = DB::connection()->prepare('INSERT INTO Task (name, description, oblivious_id) VALUES (:name, :description, :oblivious_id) RETURNING id');
-        $query->execute(array('name' => $this->name, 'description' => $this->description));
+        $query->execute(array('name' => $this->name, 'description' => $this->description, 'oblivious_id' => $this->oblivious_id));
         $row = $query->fetch();
 //        Kint::trace();
 //        Kint::dump($row);

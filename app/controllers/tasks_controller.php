@@ -4,7 +4,7 @@ class TaskController extends BaseController {
     
 
     public static function index() {
-        $tasks = Task::all();
+        $tasks = Task::all(parent::get_user_logged_in()->id);
         
 
         View::make('task/task_list.html', array('tasks' => $tasks));
@@ -52,7 +52,8 @@ class TaskController extends BaseController {
 
         $attributes = array(
             'name' => $params['name'],
-            'description' => $params['description']
+            'description' => $params['description'],
+            'oblivious_id' => parent::get_user_logged_in()->id
         );
 
         $task = new Task($attributes);

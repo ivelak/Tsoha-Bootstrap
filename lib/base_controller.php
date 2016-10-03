@@ -4,8 +4,8 @@
 
     public static function get_user_logged_in(){
         
-        if(isset($_SESSION['oblivious'])){
-            $obl_id = $_SESSION['oblivious'];
+        if(isset($_SESSION['user'])){
+            $obl_id = $_SESSION['user'];
             
             $obl=  Oblivious::find($obl_id);
             

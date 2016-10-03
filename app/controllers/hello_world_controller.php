@@ -8,14 +8,8 @@ class HelloWorldController extends BaseController {
     }
 
     public static function sandbox() {
-        $doom = new Task(array(
-            'name' => 'T',
-            'description' => 'eilen'
-            
-        ));
-        $errors = $doom->errors();
-
-        Kint::dump($errors);
+        $obl = parent::get_user_logged_in();
+        Kint::dump(parent::get_user_logged_in()->id);
 
         
     }
