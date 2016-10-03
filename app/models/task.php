@@ -10,7 +10,7 @@ class Task extends BaseModel {
     }
 
     public static function all() {
-        $query = DB::connection()->prepare('SELECT * FROM Task');
+        $query = DB::connection()->prepare('SELECT * FROM Task WHERE oblivious_id = :oblivious_id');
         $query->execute();
         $rows = $query->fetchAll();
         $tasks = array();
@@ -48,7 +48,7 @@ class Task extends BaseModel {
 
     public function save() {
 
-        $query = DB::connection()->prepare('INSERT INTO Task (name, description) VALUES (:name, :description) RETURNING id');
+        $query = DB::connection()->prepare('INSERT INTO Task (name, description, oblivious_id) VALUES (:name, :description, :oblivious_id) RETURNING id');
         $query->execute(array('name' => $this->name, 'description' => $this->description));
         $row = $query->fetch();
 //        Kint::trace();

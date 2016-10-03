@@ -3,7 +3,16 @@
   class BaseController{
 
     public static function get_user_logged_in(){
-      // Toteuta kirjautuneen käyttäjän haku tähän
+        
+        if(isset($_SESSION['oblivious'])){
+            $obl_id = $_SESSION['oblivious'];
+            
+            $obl=  Oblivious::find($obl_id);
+            
+            return $obl;
+            
+        }
+        
       return null;
     }
 
