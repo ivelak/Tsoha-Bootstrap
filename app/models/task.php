@@ -1,22 +1,12 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of askare
- *
- * @author antti
- */
 class Task extends BaseModel {
 
     public $id, $name, $description, $oblivious_id, $done;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+        $this->validators = array('validate_name');
     }
 
     public static function all() {
@@ -64,6 +54,18 @@ class Task extends BaseModel {
 //        Kint::trace();
 //        Kint::dump($row);
         $this->id = $row['id'];
+    }
+    
+    public function validate_name(){
+        $errors = array();
+        if ($this->name == '' || $this->name == null){
+            $errors[] = 'Tyhjä nimi ei kelpaa!';
+        }
+        else if(strlen($this->name)<2){
+            $errors[] = 'Nimen pituuden oltava vähintään kaksi merkkiä!';
+        }
+        
+        return $errors;
     }
 
 }

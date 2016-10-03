@@ -8,25 +8,30 @@ class HelloWorldController extends BaseController {
     }
 
     public static function sandbox() {
-        $roskat = Task::find(1);
-        $askareet = Task::all();
+        $doom = new Task(array(
+            'name' => 'T',
+            'description' => 'eilen'
+            
+        ));
+        $errors = $doom->errors();
+
+        Kint::dump($errors);
+
         
-        Kint::dump($askareet);
-        Kint::dump($roskat);
     }
-    
+
     public static function task_list() {
         View::make('suunnitelmat/task_list.html');
     }
-    
+
     public static function task_show() {
         View::make('suunnitelmat/task_show.html');
     }
-    
+
     public static function login() {
         View::make('suunnitelmat/login.html');
     }
-    
+
     public static function modify() {
         View::make('suunnitelmat/modify.html');
     }
