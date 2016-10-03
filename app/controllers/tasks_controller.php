@@ -35,7 +35,7 @@ class TaskController extends BaseController {
         if (count($errors) > 0) {
             View::make('task/edit.html', array('errors' => $errors, 'attributes' => $attributes));
         } else {
-            $game->update();
+            $task->update();
 
             Redirect::to('/task/' . $task->id, array('message' => 'Askaretta on muokattu onnistuneesti!'));
         }

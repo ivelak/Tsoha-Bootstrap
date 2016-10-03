@@ -34,7 +34,10 @@
                         {% endif %}
 
                         </td>
-                        <th><a class="btn btn-default btn-sm" href="{{base_path}}/task/{{task.id}}/modify">Muokkaa</a></th>
+                        <th><a class="btn btn-default btn-sm" href="{{base_path}}/task/{{task.id}}/edit">Muokkaa</a>
+                        <form method="post" action="{{base_path}}/task/{{task.id}}/destroy" style="display: inline-block;">
+                            <button type="submit" class="btn btn-danger">Poista</button>
+                        </form></th>
                         </tr>
                         {% endfor %}
                         </tbody>

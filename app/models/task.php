@@ -57,8 +57,8 @@ class Task extends BaseModel {
     }
     
     public function update() {
-        $query = DB::connection()->prepare('UPDATE Task (name, description) VALUES (:name, :description) RETURNING id');
-        $query->execute(array('name' => $this->name, 'description' => $this->description));
+        $query = DB::connection()->prepare('UPDATE Task SET id = :id, name = :name, description = :description WHERE id = :id RETURNING id');
+        $query->execute(array('id'=> $this->id, 'name' => $this->name, 'description' => $this->description));
         $row = $query->fetch();
 //        Kint::trace();
 //        Kint::dump($row);
@@ -66,8 +66,8 @@ class Task extends BaseModel {
     }
     
     public function destroy() {
-        $query = DB::connection()->prepare('DELETE Task (name, description) VALUES (:name, :description) RETURNING id');
-        $query->execute(array('name' => $this->name, 'description' => $this->description));
+        $query = DB::connection()->prepare('DELETE FROM Task WHERE id = :id RETURNING id');
+        $query->execute(array('id'=> $this->id));
         $row = $query->fetch();
 //        Kint::trace();
 //        Kint::dump($row);
