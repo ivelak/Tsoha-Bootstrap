@@ -17,8 +17,13 @@ class ObliviousController extends BaseController {
         } else {
             $_SESSION['user'] = $obl->id;
 
-            Redirect::to('/', array('message' => 'Kirjautuminen onnistui, ' . $obl->name . '!'));   
+            Redirect::to('/', array('message' => 'Kirjautuminen onnistui, ' . $obl->name . '!'));
         }
+    }
+
+    public static function logout() {
+        $_SESSION['user'] = null;
+        Redirect::to('/', array('message' => 'Olet kirjautunut ulos!'));
     }
 
 }

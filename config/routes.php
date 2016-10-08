@@ -8,6 +8,10 @@ $routes->post('/login', function() {
     ObliviousController::handle_login();
 });
 
+$routes->post('/logout', function() {
+    ObliviousController::logout();
+});
+
 $routes->get('/task', function() {
     TaskController::index();
 });
