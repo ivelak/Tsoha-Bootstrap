@@ -16,15 +16,15 @@ CREATE TABLE Task(
 );
 
 
-CREATE TABLE Taskclass(
+CREATE TABLE TaskCategory(
     id SERIAL PRIMARY KEY,
     name varchar(50) NOT NULL,
-    description varchar(500)
+    oblivious_id INTEGER REFERENCES Oblivious(id)
 );
 
-CREATE TABLE Taskclassunion(
+CREATE TABLE TaskCategoryUnion(
     task_id INTEGER REFERENCES Task(id),
-    taskclass_id INTEGER REFERENCES Taskclass(id)
+    taskcategory_id INTEGER REFERENCES TaskCategory(id)
 );
 
 CREATE TABLE Importance(
