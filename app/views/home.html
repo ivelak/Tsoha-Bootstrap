@@ -5,9 +5,11 @@
     <h1>Muistilista</h1>
 </div>
 
+{% if message %}
 <div class="alert alert-success">
     {{message}}
 </div>
+{% endif %}
 
 {% if user_logged_in %}
 <p>Tervetuloa {{user_logged_in.name}}!</p>
