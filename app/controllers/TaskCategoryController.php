@@ -7,14 +7,14 @@ class TaskCategoryController extends BaseController{
         $taskCategories = TaskCategory::all(parent::get_user_logged_in()->id);
 
 
-        View::make('task/task_list.html', array('tasks' => $tasks));
+        View::make('task_categories/category_list.html', array('taskCategories' => $taskCategories));
     }
 
     public static function show($id) {
         self::check_logged_in();
         $taskCategory = TaskCategory::find($id);
 
-        View::make('task/category_show.html', array('taskCategory' => $taskCategory));
+        View::make('task_categories/category_show.html', array('taskCategory' => $taskCategory));
     }
 
     public static function edit($id) {

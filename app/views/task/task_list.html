@@ -5,6 +5,7 @@
 
 <p>
     <a href="{{base_path}}/task/new" class="btn btn-success">Uusi Askare</a>
+    <a href="{{base_path}}/task/category" class="btn btn-default">Kategoriat</a>
 </p>
 
 <table class="table table-striped table-bordered">
@@ -12,7 +13,7 @@
         <tr>
             <th>Askare</th>
             <th>Tärkeys</th>
-            <th>Luokat</th>
+            <th>Kategoriat</th>
             <th>Deadline</th>       
             <th>Vaiheessa</th>
             <th></th>
@@ -25,7 +26,7 @@
         <tr>
             <td><a href="{{base_path}}/task/{{task.id}}">{{task.name}}</a></td>
             <td>3</td>
-            <td>Luokat, Tulossa</td>
+            <td>Kategoriat, Tulossa</td>
             <td>30.10.2016 klo 12.00</td>
             <td>
                 {% if task.done %}

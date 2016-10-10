@@ -1,5 +1,13 @@
 <?php
 
+$routes->get('/task/category', function() {
+    TaskCategoryController::index();    
+});
+
+$routes->get('/task/category/:id', function($id) {
+    TaskCategoryController::show($id);
+});
+
 $routes->get('/login', function() {
     ObliviousController::login();
 });
