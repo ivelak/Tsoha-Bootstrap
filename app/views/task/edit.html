@@ -23,7 +23,7 @@
         <label>Kuvaus</label>
         <textarea name="description" class="form-control">{{attributes.description}}</textarea>
     </div>
-    
+
     <div class="form-group">
         <label>Deadline</label>
         <input type="date" name="deadline" class="form-control" value="{{attributes.deadline}}">
@@ -31,6 +31,9 @@
 
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Tallenna</button>
+        <a href="{{base_path}}/task" class="btn btn-primary">Peruuta</a>
     </div>
+    
 
-{% endblock %}
+
+    {% endblock %}
