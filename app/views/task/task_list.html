@@ -27,7 +27,7 @@
             <td><a href="{{base_path}}/task/{{task.id}}">{{task.name}}</a></td>
             <td>3</td>
             <td>Kategoriat, Tulossa</td>
-            <td>30.10.2016 klo 12.00</td>
+            <td>{{task.deadline}}</td>
             <td>
                 {% if task.done %}
                 <label class="label label-success">ei

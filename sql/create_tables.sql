@@ -12,6 +12,8 @@ CREATE TABLE Task(
     oblivious_id INTEGER REFERENCES Oblivious(id),
     name varchar(50) NOT NULL,
     description varchar(500),
+    deadline DATE,
+    added DATE,
     done boolean DEFAULT FALSE
 );
 
@@ -32,8 +34,4 @@ CREATE TABLE Importance(
     importance INT NOT NULL
 );
 
-CREATE TABLE Deadline(
-    deadline DATE NOT NULL,
-    task_id INTEGER REFERENCES Task(id)
-);
     

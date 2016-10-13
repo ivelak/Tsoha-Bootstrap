@@ -8,13 +8,15 @@
 </form>
 <a href="{{base_path}}/task/{{task.id}}/edit" class="btn btn-default">Muokkaa</a>
 </p>
+{% if message %}
 <div class="alert alert-success">
     {{message}}
 </div>
+{% endif %}
 <!-- Tiedot tulee listana tähän -->
 <ul>
     <li><strong>Tärkeys:</strong> 3</li>
-    <li><strong>Deadline:</strong> 28.9.2016 klo 7.00</li>
+    <li><strong>Deadline:</strong>{{task.deadline}}</li>
     <li><strong>Luokat:</strong> Kotityöt</li>
     <li><strong>Vaiheessa:</strong>
         {% if task.done %}
@@ -22,6 +24,7 @@
             {% else %}
             <label class="label label-warning">ON
                 {% endif %}</li>
+            <li><strong>Lisätty: </strong>{{task.added}}</li>
                 </ul>
                 <!-- Kuvaus tulee tähän -->
                 <p>

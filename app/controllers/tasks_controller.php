@@ -30,7 +30,8 @@ class TaskController extends BaseController {
         $attributes = array(
             'id' => $id,
             'name' => $params['name'],
-            'description' => $params['description']
+            'description' => $params['description'],
+            'deadline' => $params['deadline']
         );
 
         $task = new Task($attributes);
@@ -57,7 +58,8 @@ class TaskController extends BaseController {
         $attributes = array(
             'name' => $params['name'],
             'description' => $params['description'],
-            'oblivious_id' => parent::get_user_logged_in()->id
+            'oblivious_id' => parent::get_user_logged_in()->id,
+            'deadline' => $params['deadline']
         );
 
         $task = new Task($attributes);

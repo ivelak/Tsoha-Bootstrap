@@ -2,7 +2,7 @@
 
 class Task extends BaseModel {
 
-    public $id, $name, $description, $oblivious_id, $done;
+    public $id, $name, $description, $oblivious_id, $done, $deadline, $added;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -21,7 +21,9 @@ class Task extends BaseModel {
                 'name' => $row['name'],
                 'description' => $row['description'],
                 'oblivious_id' => $row['oblivious_id'],
-                'done' => $row['done']
+                'done' => $row['done'],
+                'deadline' => $row['deadline'],
+                'added' => $row['added']
             ));
         }
         return $tasks;
@@ -39,7 +41,9 @@ class Task extends BaseModel {
                 'name' => $row['name'],
                 'description' => $row['description'],
                 'oblivious_id' => $row['oblivious_id'],
-                'done' => $row['done']
+                'done' => $row['done'],
+                'deadline' => $row['deadline'],
+                'added' => $row['added']
             ));
         }
 
@@ -48,8 +52,8 @@ class Task extends BaseModel {
 
     public function save() {
 
-        $query = DB::connection()->prepare('INSERT INTO Task (name, description, oblivious_id) VALUES (:name, :description, :oblivious_id) RETURNING id');
-        $query->execute(array('name' => $this->name, 'description' => $this->description, 'oblivious_id' => $this->oblivious_id));
+        $query = DB::connection()->prepare('INSERT INTO Task (name, description, oblivious_id, deadline, added) VALUES (:name, :description, :oblivious_id, :deadline, NOW()) RETURNING id');
+        $query->execute(array('name' => $this->name, 'description' => $this->description, 'oblivious_id' => $this->oblivious_id, 'deadline' => $this->deadline));
         $row = $query->fetch();
 //        Kint::trace();
 //        Kint::dump($row);
@@ -57,8 +61,8 @@ class Task extends BaseModel {
     }
     
     public function update() {
-        $query = DB::connection()->prepare('UPDATE Task SET id = :id, name = :name, description = :description WHERE id = :id RETURNING id');
-        $query->execute(array('id'=> $this->id, 'name' => $this->name, 'description' => $this->description));
+        $query = DB::connection()->prepare('UPDATE Task SET id = :id, name = :name, description = :description, deadline = :deadline WHERE id = :id RETURNING id');
+        $query->execute(array('id'=> $this->id, 'name' => $this->name, 'description' => $this->description, 'deadline' => $this->deadline));
         $row = $query->fetch();
 //        Kint::trace();
 //        Kint::dump($row);
