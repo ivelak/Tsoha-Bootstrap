@@ -2,7 +2,7 @@
 
 class Task extends BaseModel {
 
-    public $id, $name, $description, $oblivious_id, $done, $deadline, $added;
+    public $id, $name, $description, $oblivious_id, $done, $deadline, $added, $categories;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -32,9 +32,25 @@ class Task extends BaseModel {
     public static function find($id) {
 
         $query = DB::connection()->prepare('SELECT * FROM Task WHERE id = :id LIMIT 1');
+        
+        # SELECT t.*, tc.* FROM Task as t, TaskCategory as tc, TaskTaskCategory as ttc
+        #   WHERE tc.id = ttc.cat_id AND t.id = ttc.task_id AND t.id = :id
+
+        # [{ t.id: taskin id
+        #   ...
+        #   t.added: taskin luontiaika
+        #   tc.name: askarekategorian nimi
+        #   ... ja muut askarekategorian
+        #  }, toinen kategoria]
+        
+        # 
+        
         $query->execute(array('id' => $id));
         $row = $query->fetch();
 
+        # SELECT tc.* FROM Task as t, TaskCategory as tc, TaskTaskCategory as ttc
+        #   WHERE tc.id = ttc.cat_id AND t.id = ttc.task_id AND t.id = :id
+        
         if ($row) {
             $task = new Task(array(
                 'id' => $row['id'],
@@ -43,11 +59,28 @@ class Task extends BaseModel {
                 'oblivious_id' => $row['oblivious_id'],
                 'done' => $row['done'],
                 'deadline' => $row['deadline'],
-                'added' => $row['added']
+                'added' => $row['added'],
+                'categories' => Task::find_categories($id)
             ));
         }
+        
+        
 
         return $task;
+    }
+    
+    public static function find_categories($TaskId) {
+        
+        $query = DB::connection()->prepare('SELECT taskcategory_id FROM TaskCategoryUnion WHERE task_id = :TaskId');
+        $query->execute(array('TaskId' => $TaskId));
+        $rows = $query->fetchAll();
+        
+        $categories=array();
+        
+        foreach ($rows as $row){
+            $categories[] = TaskCategory::find($row['taskcategory_id']);
+        }
+        return $categories;
     }
 
     public function save() {

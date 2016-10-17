@@ -5,9 +5,9 @@
 <h1>{{task.name}}</h1>
 <!-- Painikkeet tähän -->
 <p>
-{{forms.destroy_button("#{base_path}/task/#{task.id}/destroy")}}
+    {{forms.destroy_button("#{base_path}/task/#{task.id}/destroy")}}
 
-<a href="{{base_path}}/task/{{task.id}}/edit" class="btn btn-default">Muokkaa</a>
+    <a href="{{base_path}}/task/{{task.id}}/edit" class="btn btn-default">Muokkaa</a>
 </p>
 {% if message %}
 <div class="alert alert-success">
@@ -16,6 +16,7 @@
 {% endif %}
 <!-- Tiedot tulee listana tähän -->
 <ul>
+
     <li><strong>Tärkeys:</strong> 3</li>
     <li><strong>Deadline:</strong>{{task.deadline}}</li>
     <li><strong>Luokat:</strong> Kotityöt</li>
@@ -25,11 +26,28 @@
             {% else %}
             <label class="label label-warning">ON
                 {% endif %}</li>
-            <li><strong>Lisätty: </strong>{{task.added}}</li>
+                <li><strong>Lisätty: </strong>{{task.added}}</li>
                 </ul>
                 <!-- Kuvaus tulee tähän -->
                 <p>
                 <h2> Tarkempi kuvaus: </h2>
                 {{task.description}}
                 </p>
-                {% endblock %}
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Askareen kategoriat: </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for category in task.categories %}
+                        <tr>
+                            <td>
+                                {{category.name}}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                            {% endblock %}
