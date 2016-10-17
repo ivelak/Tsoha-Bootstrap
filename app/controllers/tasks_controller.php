@@ -48,19 +48,26 @@ class TaskController extends BaseController {
 
     public static function create() {
         self::check_logged_in();
-        View::make('task/new.html');
+        View::make('task/new.html', array('categories' => TaskCategory::all(parent::get_user_logged_in()->id)));
     }
 
     public static function store() {
         self::check_logged_in();
         $params = $_POST;
 
+        $categories = $params['categories'];
+
         $attributes = array(
             'name' => $params['name'],
             'description' => $params['description'],
             'oblivious_id' => parent::get_user_logged_in()->id,
-            'deadline' => $params['deadline']
+            'deadline' => $params['deadline'],
+            'categories' => array()
         );
+
+        foreach ($categories as $category) {
+            $attributes['categories'][] = $category;
+        }
 
         $task = new Task($attributes);
         $errors = $task->errors();
