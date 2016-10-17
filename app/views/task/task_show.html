@@ -33,7 +33,7 @@
                 <h2> Tarkempi kuvaus: </h2>
                 {{task.description}}
                 </p>
-                <table class="table table-condensed">
+                <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>Askareen kategoriat: </th>
@@ -43,11 +43,11 @@
                         {% for category in task.categories %}
                         <tr>
                             <td>
-                                {{category.name}}
+                                <a href="{{base_path}}/task/category/{{category.id}}">{{category.name}}</a>
                             </td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
 
-                            {% endblock %}
+                {% endblock %}

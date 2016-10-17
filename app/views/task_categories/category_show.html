@@ -14,5 +14,22 @@
 </div>
 {% endif %}
 <!-- Tiedot tulee listana tähän -->
-<p> Tähän tulee lista kaikista askareista joilla on tämä kategoria </p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Kategoriaan kuuluvat askareet: </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for task in taskCategory.tasks %}
+        <tr>
+            <td>
+                <a href="{{base_path}}/task/{{task.id}}">{{task.name}}</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
 {% endblock %}

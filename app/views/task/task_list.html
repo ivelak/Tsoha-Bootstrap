@@ -26,7 +26,12 @@
         <tr>
             <td><a href="{{base_path}}/task/{{task.id}}">{{task.name}}</a></td>
             <td>3</td>
-            <td>Kategoriat, Tulossa</td>
+            <td>
+                
+                {% for category in task.categories %}
+                <a href="{{base_path}}/task/category/{{category.id}}">{{category.name}}</a><br>
+                {% endfor %}
+            </td>
             <td>{{task.deadline}}</td>
             <td>
                 {% if task.done %}

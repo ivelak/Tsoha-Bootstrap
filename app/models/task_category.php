@@ -2,7 +2,7 @@
 
 class TaskCategory extends BaseModel {
 
-    public $id, $name, $oblivious_id;
+    public $id, $name, $oblivious_id, $tasks;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -18,13 +18,15 @@ class TaskCategory extends BaseModel {
             $taskCategories[] = new TaskCategory(array(
                 'id' => $row['id'],
                 'name' => $row['name'],
-                'oblivious_id' => $row['oblivious_id']
+                'oblivious_id' => $row['oblivious_id'],
+                'tasks' => TaskCategory::find_tasks($row['id'])
+                    
             ));
         }
         return $taskCategories;
     }
 
-    public static function find($id) {
+    public function find($id) {
 
         $query = DB::connection()->prepare('SELECT * FROM TaskCategory WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
@@ -34,11 +36,29 @@ class TaskCategory extends BaseModel {
             $taskCategory = new TaskCategory(array(
                 'id' => $row['id'],
                 'name' => $row['name'],
-                'oblivious_id' => $row['oblivious_id']
+                'oblivious_id' => $row['oblivious_id'],
+                'tasks' => TaskCategory::find_tasks($id)
             ));
         }
-
+        #Kint::trace();
+        #Kint::dump($taskCategory->tasks);
         return $taskCategory;
+    }
+    
+    public static function find_tasks($TaskCategoryId) {
+        
+        $query = DB::connection()->prepare('SELECT task_id FROM TaskCategoryUnion WHERE taskcategory_id = :TaskCategoryId');
+        $query->execute(array('TaskCategoryId' => $TaskCategoryId));
+        $rows = $query->fetchAll();
+        
+        $tasklist=array();
+        
+        foreach ($rows as $row){
+            $tasklist[] = Task::findWithoutCategories($row['task_id']);
+        }
+        #Kint::trace();
+        #Kint::dump($tasklist);
+        return $tasklist;
     }
 
     public function save() {

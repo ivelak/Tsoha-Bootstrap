@@ -13,3 +13,4 @@ INSERT INTO TaskCategory (name, oblivious_id) VALUES('Koulu', '2');
 
 INSERT INTO TaskCategoryUnion (task_id, taskcategory_id) VALUES ('2','1');
 INSERT INTO TaskCategoryUnion (task_id, taskcategory_id) VALUES ('2','2');
+INSERT INTO TaskCategoryUnion (task_id, taskcategory_id) VALUES ('1','2');

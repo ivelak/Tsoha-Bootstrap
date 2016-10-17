@@ -23,10 +23,34 @@ class Task extends BaseModel {
                 'oblivious_id' => $row['oblivious_id'],
                 'done' => $row['done'],
                 'deadline' => $row['deadline'],
-                'added' => $row['added']
+                'added' => $row['added'],
+                'categories' => Task::find_categories($row['id'])
             ));
         }
         return $tasks;
+    }
+    
+    public static function findWithoutCategories($id) {
+
+        $query = DB::connection()->prepare('SELECT * FROM Task WHERE id = :id LIMIT 1');       
+        $query->execute(array('id' => $id));
+        $row = $query->fetch();
+
+        if ($row) {
+            $task = new Task(array(
+                'id' => $row['id'],
+                'name' => $row['name'],
+                'description' => $row['description'],
+                'oblivious_id' => $row['oblivious_id'],
+                'done' => $row['done'],
+                'deadline' => $row['deadline'],
+                'added' => $row['added']
+            ));
+        }
+        
+        
+
+        return $task;
     }
 
     public static function find($id) {
