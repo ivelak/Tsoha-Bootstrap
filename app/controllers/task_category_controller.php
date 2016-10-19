@@ -20,7 +20,7 @@ class TaskCategoryController extends BaseController{
     public static function edit($id) {
         self::check_logged_in();
         $taskCategory = TaskCategory::find($id);
-        View::make('task/category_edit.html', array('attributes' => $taskCategory));
+        View::make('task_categories/category_edit.html', array('attributes' => $taskCategory));
     }
 
     public static function update($id) {
@@ -36,7 +36,7 @@ class TaskCategoryController extends BaseController{
         $errors = $taskCategory->errors();
 
         if (count($errors) > 0) {
-            View::make('task/category_edit.html', array('errors' => $errors, 'attributes' => $attributes));
+            View::make('task_categories/category_edit.html', array('errors' => $errors, 'attributes' => $attributes));
         } else {
             $taskCategory->update();
 
@@ -46,7 +46,7 @@ class TaskCategoryController extends BaseController{
 
     public static function create() {
         self::check_logged_in();
-        View::make('task/new_category.html');
+        View::make('task_categories/category_new.html');
     }
 
     public static function store() {
@@ -55,7 +55,6 @@ class TaskCategoryController extends BaseController{
 
         $attributes = array(
             'name' => $params['name'],
-            'description' => $params['description'],
             'oblivious_id' => parent::get_user_logged_in()->id
         );
 
@@ -66,10 +65,10 @@ class TaskCategoryController extends BaseController{
 
             $taskCategory->save();
 
-            Redirect::to('/task/' . $task->id, array('message' => 'Uusi askare lisätty!'));
+            Redirect::to('/task/category', array('message' => 'Uusi askare lisätty!'));
         } else {
 //Kint::dump($errors);
-            View::make('task/new_category.html', array('errors' => $errors, 'attributes' => $attributes));
+            View::make('task_categories/category_new.html', array('errors' => $errors, 'attributes' => $attributes));
         }
 
 //Kint::dump($params);
@@ -80,6 +79,6 @@ class TaskCategoryController extends BaseController{
         $taskCategory = new TaskCategory(array('id' => $id));
         $taskCategory->destroy();
 
-        Redirect::to('/task', array('message' => 'Askare on poistettu onnistuneesti!'));
+        Redirect::to('/task/category', array('message' => 'Askare on poistettu onnistuneesti!'));
     }
 }

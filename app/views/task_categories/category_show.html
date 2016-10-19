@@ -4,9 +4,9 @@
 <h1>{{taskCategory.name}}</h1>
 <!-- Painikkeet tähän -->
 <p>
-    {{forms.destroy_button("#{base_path}/task/category/#{category.id}/destroy")}}
+    {{forms.destroy_button("#{base_path}/task/category/#{taskCategory.id}/destroy")}}
 
-    <a class="btn btn-default btn-sm" href="{{base_path}}/task/category/{{category.id}}/edit">Muokkaa</a>
+    <a class="btn btn-default btn-sm" href="{{base_path}}/task/category/{{taskCategory.id}}/edit">Muokkaa</a>
 </p>
 {% if message %}
 <div class="alert alert-success">

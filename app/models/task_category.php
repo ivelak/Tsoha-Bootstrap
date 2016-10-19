@@ -6,6 +6,7 @@ class TaskCategory extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+        $this->validators = array('validate_name');
     }
 
     public static function all($oblivious_id) {
@@ -83,11 +84,24 @@ class TaskCategory extends BaseModel {
     
     public function destroy() {
         $query = DB::connection()->prepare('DELETE FROM TaskCategory WHERE id = :id RETURNING id');
+        $query1 = DB::connection()->prepare('DELETE FROM TaskCategoryUnion WHERE Taskcategory_id = :id');
+        $query1->execute(array('id'=> $this->id));
         $query->execute(array('id'=> $this->id));
         $row = $query->fetch();
 //        Kint::trace();
 //        Kint::dump($row);
         $this->id = $row['id'];
+    }
+    
+    public function validate_name() {
+        $errors = array();
+        if ($this->name == '' || $this->name == null) {
+            $errors[] = 'Tyhjä nimi ei kelpaa!';
+        } else if (strlen($this->name) < 2) {
+            $errors[] = 'Nimen pituuden oltava vähintään kaksi merkkiä!';
+        }
+
+        return $errors;
     }
 
 }

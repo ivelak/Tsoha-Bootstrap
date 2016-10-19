@@ -4,8 +4,20 @@ $routes->get('/task/category', function() {
     TaskCategoryController::index();    
 });
 
+$routes->get('/task/category/category_new', function() {
+    TaskCategoryController::create();
+});
+
 $routes->get('/task/category/:id', function($id) {
     TaskCategoryController::show($id);
+});
+
+$routes->post('/task/category/:id/destroy', function($id) {
+    TaskCategoryController::destroy($id);
+});
+
+$routes->post('/task/category', function() {
+    TaskCategoryController::store();
 });
 
 $routes->get('/login', function() {
