@@ -136,6 +136,8 @@ class Task extends BaseModel {
 
     public function destroy() {
         $query = DB::connection()->prepare('DELETE FROM Task WHERE id = :id RETURNING id');
+        $query1 = DB::connection()->prepare('DELETE FROM TaskCategoryUnion WHERE Task_id = :id');
+        $query1->execute(array('id' => $this->id));                
         $query->execute(array('id' => $this->id));
         $row = $query->fetch();
 //        Kint::trace();
