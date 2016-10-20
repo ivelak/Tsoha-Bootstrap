@@ -12,7 +12,6 @@
     <thead>
         <tr>
             <th>Askare</th>
-            <th>Tärkeys</th>
             <th>Kategoriat</th>
             <th>Deadline</th>       
             <th>Vaiheessa</th>
@@ -25,7 +24,6 @@
 
         <tr>
             <td><a href="{{base_path}}/task/{{task.id}}">{{task.name}}</a></td>
-            <td>3</td>
             <td>
                 
                 {% for category in task.categories %}
@@ -35,15 +33,17 @@
             <td>{{task.deadline}}</td>
             <td>
                 {% if task.done %}
-                <label class="label label-success">ei
+                <label class="label label-success">EI
                     {% else %}
                     <label class="label label-warning">ON
                         {% endif %}
 
                         </td>
+                        {% if task.done == false %}
                         <th><a class="btn btn-default btn-sm" href="{{base_path}}/task/{{task.id}}/edit">Muokkaa</a>
                         {{forms.destroy_button("#{base_path}/task/#{task.id}/destroy")}}
                         </th>
+                        {% endif %}
                         </tr>
                         {% endfor %}
                         </tbody>

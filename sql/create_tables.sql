@@ -29,9 +29,4 @@ CREATE TABLE TaskCategoryUnion(
     taskcategory_id INTEGER REFERENCES TaskCategory(id)
 );
 
-CREATE TABLE Importance(
-    task_id INTEGER REFERENCES Task(id),
-    importance INT NOT NULL
-);
-
     
