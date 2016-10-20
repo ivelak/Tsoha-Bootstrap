@@ -12,6 +12,14 @@ $routes->get('/task/category/:id', function($id) {
     TaskCategoryController::show($id);
 });
 
+$routes->get('/task/category/:id/edit', function($id) {
+    TaskCategoryController::edit($id);
+});
+
+$routes->post('/task/category/:id/edit', function($id) {
+    TaskCategoryController::update($id);
+});
+
 $routes->post('/task/category/:id/destroy', function($id) {
     TaskCategoryController::destroy($id);
 });

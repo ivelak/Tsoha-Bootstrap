@@ -40,7 +40,7 @@ class TaskCategoryController extends BaseController{
         } else {
             $taskCategory->update();
 
-            Redirect::to('/task/' . $task->id, array('message' => 'Askaretta on muokattu onnistuneesti!'));
+            Redirect::to('/task/category/' . $taskCategory->id, array('message' => 'Askarekategoriaa on muokattu onnistuneesti!'));
         }
     }
 

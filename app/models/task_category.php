@@ -74,7 +74,7 @@ class TaskCategory extends BaseModel {
 
     public function update() {
 
-        $query = DB::connection()->prepare('UPDATE TaskCategory SET id = :id, name = :name, WHERE id = :id RETURNING id');
+        $query = DB::connection()->prepare('UPDATE TaskCategory SET id = :id, name = :name WHERE id = :id RETURNING id');
         $query->execute(array('id' => $this->id, 'name' => $this->name));
         $row = $query->fetch();
 //        Kint::trace();
