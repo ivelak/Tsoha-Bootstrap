@@ -60,6 +60,10 @@ $routes->post('/task/:id/destroy', function($id) {
     TaskController::destroy($id);
 });
 
+$routes->post('/task/:id/edit/destroy_category/:category_id', function($id, $category_id) {
+    TaskController::destroy_category($id, $category_id); 
+});
+
 $routes->get('/', function() {
     HelloWorldController::index();
 });

@@ -93,6 +93,8 @@ class TaskCategory extends BaseModel {
         $this->id = $row['id'];
     }
     
+    
+    
     public function validate_name() {
         $errors = array();
         if ($this->name == '' || $this->name == null) {

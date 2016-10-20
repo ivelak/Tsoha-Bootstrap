@@ -144,6 +144,13 @@ class Task extends BaseModel {
 //        Kint::dump($row);
         $this->id = $row['id'];
     }
+    public function destroy_category($category_id) {
+        $query = DB::connection()->prepare('DELETE FROM TaskCategoryUnion WHERE task_id = :task_id AND taskcategory_id = :category_id RETURNING task_id');
+        $query->execute(array('task_id'=> $this->id, 'category_id' => $category_id));
+        $row = $query->fetch();
+        
+        $this->id = $row['task_id'];
+    }
 
     public function validate_name() {
         $errors = array();
