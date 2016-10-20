@@ -20,8 +20,17 @@ class TaskController extends BaseController {
     public static function edit($id) {
         self::check_logged_in();
         $task = Task::find($id);
-        $categories = TaskCategory::all(parent::get_user_logged_in()->id);
-        View::make('task/edit.html', array('attributes' => $task, 'categories' => $categories));
+        $categories_all = TaskCategory::all(parent::get_user_logged_in()->id);
+        $categories_task = $task->categories;
+        $categories_result = array();
+        
+        foreach ($categories_all as $cat_all){
+            if (!in_array($cat_all, $categories_task)){
+                $categories_result[]=$cat_all;
+            }
+        }
+        
+        View::make('task/edit.html', array('attributes' => $task, 'categories' => $categories_result));
     }
 
     public static function update($id) {
@@ -107,8 +116,7 @@ class TaskController extends BaseController {
         $task->destroy_category($category_id);
         $task = Task::find($id);
         
-        View::make('task/edit.html', array('attributes' => $task));
-        
+        TaskController::edit($id);
     }
 
 }
