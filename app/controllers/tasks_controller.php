@@ -100,7 +100,7 @@ class TaskController extends BaseController {
             Redirect::to('/task/' . $task->id, array('message' => 'Uusi askare lisätty!'));
         } else {
 //Kint::dump($errors);
-            View::make('task/new.html', array('errors' => $errors, 'attributes' => $attributes));
+            View::make('task/new.html', array('errors' => $errors, 'attributes' => $attributes, 'categories' => TaskCategory::all(parent::get_user_logged_in()->id)));
         }
 
 //Kint::dump($params);
