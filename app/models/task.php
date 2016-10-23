@@ -6,7 +6,7 @@ class Task extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_name');
+        $this->validators = array('validate_name', 'validate_deadline');
     }
 
     public static function all($oblivious_id) {
@@ -161,6 +161,13 @@ class Task extends BaseModel {
             $errors[] = 'Nimen pituuden oltava vähintään kaksi merkkiä!';
         }
 
+        return $errors;
+    }
+    public function validate_deadline() {
+        $errors = array();
+        if ($this->deadline <  date("Y-m-d")){
+            $errors[]='deadline ei voi olla menneisyydessä';
+        }
         return $errors;
     }
 
