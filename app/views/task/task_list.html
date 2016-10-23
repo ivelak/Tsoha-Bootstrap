@@ -25,7 +25,7 @@
         <tr>
             <td><a href="{{base_path}}/task/{{task.id}}">{{task.name}}</a></td>
             <td>
-                
+
                 {% for category in task.categories %}
                 <a href="{{base_path}}/task/category/{{category.id}}">{{category.name}}</a><br>
                 {% endfor %}
@@ -39,11 +39,14 @@
                         {% endif %}
 
                         </td>
-                        {% if task.done == false %}
-                        <th><a class="btn btn-default btn-sm" href="{{base_path}}/task/{{task.id}}/edit">Muokkaa</a>
-                        {{forms.destroy_button("#{base_path}/task/#{task.id}/destroy")}}
+                        
+                        <th>
+                            {% if task.done == false %}
+                            <a class="btn btn-default btn-sm" href="{{base_path}}/task/{{task.id}}/edit">Muokkaa</a>
+                            {% endif %}
+                            {{forms.destroy_button("#{base_path}/task/#{task.id}/destroy")}}
                         </th>
-                        {% endif %}
+
                         </tr>
                         {% endfor %}
                         </tbody>

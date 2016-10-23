@@ -23,13 +23,13 @@ class TaskController extends BaseController {
         $categories_all = TaskCategory::all(parent::get_user_logged_in()->id);
         $categories_task = $task->categories;
         $categories_result = array();
-        
-        foreach ($categories_all as $cat_all){
-            if (!in_array($cat_all, $categories_task)){
-                $categories_result[]=$cat_all;
+
+        foreach ($categories_all as $cat_all) {
+            if (!in_array($cat_all, $categories_task)) {
+                $categories_result[] = $cat_all;
             }
         }
-        
+
         View::make('task/edit.html', array('attributes' => $task, 'categories' => $categories_result));
     }
 
@@ -38,7 +38,7 @@ class TaskController extends BaseController {
         $params = $_POST;
 
         $categories = $params['categories'];
-        
+
         $attributes = array(
             'id' => $id,
             'name' => $params['name'],
@@ -50,7 +50,7 @@ class TaskController extends BaseController {
         foreach ($categories as $category) {
             $attributes['categories'][] = $category;
         }
-        
+
         $task = new Task($attributes);
         $errors = $task->errors();
 
@@ -72,7 +72,11 @@ class TaskController extends BaseController {
         self::check_logged_in();
         $params = $_POST;
 
-        $categories = $params['categories'];
+        if (array_key_exists('categories', $params)) {
+            $categories = $params['categories'];
+        } else {
+            $categories = array();
+        }
 
         $attributes = array(
             'name' => $params['name'],
@@ -109,13 +113,13 @@ class TaskController extends BaseController {
 
         Redirect::to('/task', array('message' => 'Askare on poistettu onnistuneesti!'));
     }
-    
+
     public static function destroy_category($id, $category_id) {
         self::check_logged_in();
         $task = Task::find($id);
         $task->destroy_category($category_id);
         $task = Task::find($id);
-        
+
         TaskController::edit($id);
     }
 
