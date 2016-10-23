@@ -1,7 +1,7 @@
 <?php
 
 $routes->get('/task/category', function() {
-    TaskCategoryController::index();    
+    TaskCategoryController::index();
 });
 
 $routes->get('/task/category/category_new', function() {
@@ -26,6 +26,14 @@ $routes->post('/task/category/:id/destroy', function($id) {
 
 $routes->post('/task/category', function() {
     TaskCategoryController::store();
+});
+
+$routes->get('/signin', function() {
+    ObliviousController::signin();
+});
+
+$routes->post('/signin', function() {
+    ObliviousController::create();
 });
 
 $routes->get('/login', function() {
@@ -69,7 +77,7 @@ $routes->post('/task/:id/destroy', function($id) {
 });
 
 $routes->post('/task/:id/edit/destroy_category/:category_id', function($id, $category_id) {
-    TaskController::destroy_category($id, $category_id); 
+    TaskController::destroy_category($id, $category_id);
 });
 
 $routes->get('/', function() {

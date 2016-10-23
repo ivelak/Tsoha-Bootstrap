@@ -25,6 +25,31 @@ class Oblivious extends BaseModel {
         }
         return $obl;
     }
+    
+    public function add_newname_validator() {
+        $this->validators[]='validate_newname';
+    }
+
+    public static function allnames() {
+        $query = DB::connection()->prepare('SELECT name FROM Oblivious');
+        $query->execute();
+        $rows = $query->fetchAll();
+        $names=array();
+        foreach ($rows as $row){
+            $names[]=$row['name'];
+        }
+        return $names;
+        
+    }
+
+    public function save() {
+        $query = DB::connection()->prepare('INSERT INTO Oblivious (name, password) VALUES (:name, :password) RETURNING id');
+        $query->execute(array('name' => $this->name, 'password' => $this->password));
+        $row = $query->fetch();
+
+        $this->id = $row['id'];
+        
+    }
 
     public static function find($id) {
 
@@ -46,19 +71,31 @@ class Oblivious extends BaseModel {
     public function validate_name() {
         $errors = array();
         if ($this->name == '' || $this->name == null) {
-            $errors[] = 'Tyhjä nimi ei kelpaa!';
-        } else if (strlen($this->name) < 2) {
-            $errors[] = 'Nimen pituuden oltava vähintään kaksi merkkiä!';
+            $errors[] = 'Käyttäjätunnus ei voi olla tyhjä!';
+        } else if (strlen($this->name) < 3) {
+            $errors[] = 'Käyttäjätunnuksen on oltava vähintään kolmen merkin pituinen!';
         }
 
         return $errors;
     }
 
+    public function validate_newname() {
+        $names = Oblivious::allnames();
+        $errors = array();
+
+        foreach ($names as $name) {
+            if ($this->name == $name) {
+                $errors[] = 'Antamasi käyttäjätunnus on jo käytössä! Keksi uusi!';
+            }
+        }
+        return $errors;
+    }
+
     public function validate_password() {
         $errors = array();
-        if ($this->name == '' || $this->name == null) {
+        if ($this->password == '' || $this->password == null) {
             $errors[] = 'Salasana ei voi olla tyhjä!';
-        } else if (strlen($this->name) < 5) {
+        } else if (strlen($this->password) < 5) {
             $errors[] = 'Salasanan pituuden oltava vähintään viisi merkkiä!';
         }
 
