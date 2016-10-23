@@ -37,7 +37,11 @@ class TaskController extends BaseController {
         self::check_logged_in();
         $params = $_POST;
 
-        $categories = $params['categories'];
+        if (array_key_exists('categories', $params)) {
+            $categories = $params['categories'];
+        } else {
+            $categories = array();
+        }
 
         $attributes = array(
             'id' => $id,
@@ -55,7 +59,23 @@ class TaskController extends BaseController {
         $errors = $task->errors();
 
         if (count($errors) > 0) {
-            View::make('task/edit.html', array('errors' => $errors, 'attributes' => $attributes));
+
+            $task->categories = Task::find_categories($task->id);
+            $categories_all = TaskCategory::all(parent::get_user_logged_in()->id);
+            $categories_task = $task->categories;
+            $categories_result = array();
+
+            foreach ($categories_all as $cat_all) {
+                if (!in_array($cat_all, $categories_task)) {
+                    $categories_result[] = $cat_all;
+                }
+            }
+            foreach ($categories_task as $category) {
+            $attributes['categories'][] = $category;
+        }
+
+            
+            View::make('task/edit.html', array('errors' => $errors, 'attributes' => $attributes, 'categories' => $categories_result));
         } else {
             $task->update();
 
