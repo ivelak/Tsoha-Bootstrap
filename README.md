@@ -3,7 +3,6 @@
 Sovellukseeni liittyviä linkkejä:
 
 * [Linkki etusivulle](rantapel.users.cs.helsinki.fi/tsoha)
-* [Linkki askareiden listaussivulle](rantapel.users.cs.helsinki.fi/tsoha/task_list)
 
 
 
