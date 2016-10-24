@@ -1,7 +1,13 @@
 <?php
 
+/*
+ * Askareen kontrolleriluokka
+ */
 class TaskController extends BaseController {
 
+    /*
+     * Palauttaa näkymän Askarelistalle
+     */
     public static function index() {
         self::check_logged_in();
         $tasks = Task::all(parent::get_user_logged_in()->id);
@@ -10,6 +16,9 @@ class TaskController extends BaseController {
         View::make('task/task_list.html', array('tasks' => $tasks));
     }
 
+    /*
+     * Palauttaa näkymän yksittäisen Askareen esittelysivulle
+     */
     public static function show($id) {
         self::check_logged_in();
         $task = Task::find($id);
@@ -17,6 +26,9 @@ class TaskController extends BaseController {
         View::make('task/task_show.html', array('task' => $task));
     }
 
+    /*
+     * Palauttaa näkymän Askareen muokkaussivulle
+     */
     public static function edit($id) {
         self::check_logged_in();
         $task = Task::find($id);
@@ -30,9 +42,26 @@ class TaskController extends BaseController {
             }
         }
 
-        View::make('task/edit.html', array('attributes' => $task, 'categories' => $categories_result));
+        View::make('task/task_edit.html', array('attributes' => $task, 'categories' => $categories_result));
+    }
+    
+    /*
+     * Merkitsee Askareen suoritetuksi ja uudelleenohja Askareiden listaussivulle
+     */
+    public static function make_done($id) {
+        self::check_logged_in();
+        $task = Task::find($id);
+        $task->done();
+        $message='Askare ' . $task->name . ' merkitty suoritetuksi!';
+        
+        Redirect::to('/task', array('task'=>$task, 'message' => $message));
     }
 
+    /*
+     * Päivittää attribuuttien mukaiset tiedot Askareelle ja uudelleenohjaa Askareen esittelysivulle
+     * Kutsuu metodia destroy_category($id, $categoryid)
+     * Palauttaa näkymän muokkaussivulle mikäli parametreissä on virheitä
+     */
     public static function update($id) {
         self::check_logged_in();
         $params = $_POST;
@@ -75,7 +104,7 @@ class TaskController extends BaseController {
         }
 
             
-            View::make('task/edit.html', array('errors' => $errors, 'attributes' => $attributes, 'categories' => $categories_result));
+            View::make('task/task_edit.html', array('errors' => $errors, 'attributes' => $attributes, 'categories' => $categories_result));
         } else {
             $task->update();
 
@@ -83,11 +112,18 @@ class TaskController extends BaseController {
         }
     }
 
+    /*
+     * Palauttaa näkymän uuden Askareen luontisivulle
+     */
     public static function create() {
         self::check_logged_in();
-        View::make('task/new.html', array('categories' => TaskCategory::all(parent::get_user_logged_in()->id)));
+        View::make('task/task_new.html', array('categories' => TaskCategory::all(parent::get_user_logged_in()->id)));
     }
 
+    /*
+     * Tallettaa attribuuttien mukaiset tiedot uudelle Askareelle ja uudelleenohjaa Askareen esittelysivulle
+     * Palauttaa näkymän uuden Askareen lisäämiselle mikäli lisäämisessä on ollut validointivirheitä
+     */
     public static function store() {
         self::check_logged_in();
         $params = $_POST;
@@ -119,21 +155,28 @@ class TaskController extends BaseController {
 
             Redirect::to('/task/' . $task->id, array('message' => 'Uusi askare lisätty!'));
         } else {
-//Kint::dump($errors);
-            View::make('task/new.html', array('errors' => $errors, 'attributes' => $attributes, 'categories' => TaskCategory::all(parent::get_user_logged_in()->id)));
+            
+            View::make('task/task_new.html', array('errors' => $errors, 'attributes' => $attributes, 'categories' => TaskCategory::all(parent::get_user_logged_in()->id)));
         }
 
-//Kint::dump($params);
     }
 
+    /*
+     * Poistaa id:n mukaisen askareen ja uudelleenohjaa Askarelistauksen näkymään
+     */
     public static function destroy($id) {
         self::check_logged_in();
-        $task = new Task(array('id' => $id));
+        $task = Task::find($id);
         $task->destroy();
 
-        Redirect::to('/task', array('message' => 'Askare on poistettu onnistuneesti!'));
+        $message = 'Askare ' . $task->name . ' on poistettu';
+        
+        Redirect::to('/task', array('message' => $message));
     }
 
+    /*
+     * Poistaa askarekategorian askareelta. Metodia kutsutaan metodissa update($id)
+     */
     public static function destroy_category($id, $category_id) {
         self::check_logged_in();
         $task = Task::find($id);

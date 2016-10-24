@@ -5,3 +5,11 @@
 </form>
 
 {% endmacro %}
+
+{% macro done_button(action, text) %}
+
+<form method="post" action="{{action}}" style="display: inline-block;" class="destroy-form" data-confirm="Haluatko varmasti merkitä Askareen suoritetuksi?">
+    <button type="submit" class="btn btn-success">{{text|default('Valmis')}}</button>
+</form>
+
+{% endmacro %}

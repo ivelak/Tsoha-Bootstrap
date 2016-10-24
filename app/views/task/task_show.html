@@ -3,32 +3,33 @@
 {% import "macros/forms.html" as forms %}
 
 <h1>{{task.name}}</h1>
-<!-- Painikkeet tähän -->
 <p>
     {{forms.destroy_button("#{base_path}/task/#{task.id}/destroy")}}
+    
 
+    {% if task.done==false %}
     <a href="{{base_path}}/task/{{task.id}}/edit" class="btn btn-default">Muokkaa</a>
+    {{forms.done_button("#{base_path}/task/#{task.id}/done")}}
+    {% endif %}
 </p>
 {% if message %}
 <div class="alert alert-success">
     {{message}}
 </div>
 {% endif %}
-<!-- Tiedot tulee listana tähän -->
 <ul>
 
-    <li><strong>Tärkeys:</strong> 3</li>
+    
     <li><strong>Deadline:</strong>{{task.deadline}}</li>
     <li><strong>Luokat:</strong> Kotityöt</li>
     <li><strong>Vaiheessa:</strong>
         {% if task.done %}
-        <label class="label label-success">ei
+        <label class="label label-success">EI
             {% else %}
             <label class="label label-warning">ON
                 {% endif %}</li>
                 <li><strong>Lisätty: </strong>{{task.added}}</li>
                 </ul>
-                <!-- Kuvaus tulee tähän -->
                 <p>
                 <h2> Tarkempi kuvaus: </h2>
                 {{task.description}}

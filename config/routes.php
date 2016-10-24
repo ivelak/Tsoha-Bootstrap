@@ -64,6 +64,10 @@ $routes->get('/task/:id', function($id) {
     TaskController::show($id);
 });
 
+$routes->post('/task/:id/done', function($id) {
+    TaskController::make_done($id);
+});
+
 $routes->get('/task/:id/edit', function($id) {
     TaskController::edit($id);
 });
