@@ -1,3 +1,8 @@
+## Tietoa projektista
+
+Sovellus on kehitetty Helsingin yliopiston tietojenkäsittelytieteiden laitoksen Tietokantasovellus harjoitustyö -kurssilla.
+Harjoitustyön tarkoituksena oli toteuttaa itsenäisesti web-sovellus, joka hyödyntää ja tallettaa tietoja sitä varten luotuun tietokantaan.
+
 # Tietokantasovelluksen esittelysivu
 
 Sovellukseeni liittyviä linkkejä:
